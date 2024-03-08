@@ -15,6 +15,7 @@
 </template>
 
 <script>
+
 import axios from "axios";
 import store from "@/store/index.js";
 
@@ -32,8 +33,29 @@ export default {
   },
   methods:{
     async getPosts() {
-      axios.get("/posts").then((response) => response.data)
-          .then((json) => console.log(json))
+      store.commit('showSpinner', store.state.spinner)
+
+      let posts = await axios.get("/posts").then((response) => response.data)
+      if(posts !== undefined){
+        store.commit('hideSpinner', store.state.spinner)
+      }
+
+      return posts
+    },
+    edit(item){
+      return console.log(item.id)
+    },
+    async remove(item){
+      try {
+        // resource will not be really updated on the server but it will be faked as if.
+        await axios.delete(`/posts/${item.id}`);
+        this.items = this.items.filter((i) => i.id !== item.id);
+      } catch (error) {
+        console.error(`Error deleting post: ${error}`);
+      }
+    },
+    isLoaded() {
+      return store.state.spinner
     }
   },
   async mounted() {
