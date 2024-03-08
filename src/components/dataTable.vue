@@ -1,16 +1,23 @@
 <template>
   <div>
-    <b-table striped hover :items="items" :fields="fields">
+    <b-table striped hover :items="items" :fields="fields" :style="{ marginTop: '6rem' }">
       <template #cell(actions)="row">
-        <b-button class="bottoneModifica" variant="outline-info" size="sm" @click="row">Modifica</b-button>
-        <b-button size="sm" @click="row" variant="outline-danger"> Elimina </b-button>
+        <div class="div-bottoni">
+          <b-button size="sm" @click="edit(row.item)" variant="outline-info" >Modifica</b-button>
+          <b-button size="sm" @click="remove(row.item)" variant="outline-danger">Elimina</b-button>
+        </div>
       </template>
     </b-table>
+    <div class="text-center" v-if="isLoaded()">
+      <b-spinner variant="primary" label="Spinning"></b-spinner>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import store from "@/store/index.js";
+
 
 export default {
   name: "dataTable",
@@ -18,8 +25,8 @@ export default {
     return {
       items: [],
       fields:[
-        { key: "title", label: 'Age', sortable: true },
-        { key: "actions", label: "Actions" }
+        { key: "title", label: 'Titolo'},
+        { key: "actions", label: "Azioni"}
       ]
     }
   },
@@ -29,16 +36,18 @@ export default {
           .then((json) => console.log(json))
     }
   },
-  mounted() {
-    this.getPosts();
+  async mounted() {
+    this.items = await this.getPosts()
   }
 }
 </script>
 
 <style scoped>
 
-.bottoneModifica{
-  margin-right: 1rem;
+.div-bottoni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
 </style>
