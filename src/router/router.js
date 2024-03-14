@@ -1,5 +1,8 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import postsIndex from "@/views/posts/index.vue"
+import postsIndex from "@/views/posts/posts"
+import addPost from "@/views/posts/add.vue";
+import editPost from "@/views/posts/edit"
+
 
 
 const routes = [
@@ -7,6 +10,16 @@ const routes = [
         path: '/',
         name: 'postsIndex',
         component: postsIndex
+    },
+    {
+        path: "/posts/create",
+        name: 'create',
+        component: addPost
+    },
+    {
+        path: "/posts/edit",
+        name: 'edit',
+        component: editPost
     }
 ]
 

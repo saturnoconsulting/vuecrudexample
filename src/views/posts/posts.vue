@@ -16,6 +16,9 @@ export default {
   name: "postsIndex",
   components:{
     dataTable
+  },
+  methods:{
+
   }
 }
 </script>
