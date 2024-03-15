@@ -15,6 +15,7 @@
 
 <script>
 import Post from "@/models/Post";
+import Swal from "sweetalert2";
 
 export default {
   name: "rowTable",

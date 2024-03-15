@@ -89,4 +89,8 @@ export default {
   gap: 0.6rem;
 }
 
+.invalid-values{
+  border-color: red;
+}
+
 </style>2
