@@ -5,7 +5,7 @@ export default {
     getStatusMenu: state => {
         return state.menu;
     },
-    getPost: state => {
+    getPosts: state => {
         return state.posts;
     }
 }

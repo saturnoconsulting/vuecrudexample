@@ -36,7 +36,7 @@ export default {
   },
   computed:{
     posts() {
-      return this.$store.getters.getPost;
+      return this.$store.getters.getPosts;
     },
     spinner(){
       return this.$store.getters.getSpinner;

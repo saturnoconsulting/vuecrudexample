@@ -3,8 +3,10 @@
     <td>{{item.title}}</td>
     <td>
       <div class="div-bottoni">
-        <b-button size="sm" @click="edit(item)" variant="outline-info" >Modifica</b-button>
-        <b-button size="sm" @click="remove(item)" variant="outline-danger">Elimina</b-button>
+        <router-link :to="'posts/edit/' + item.id">
+          <b-button size="sm" variant="info">Modifica</b-button>
+        </router-link>
+        <b-button size="sm" @click="remove(item)" variant="danger">Elimina</b-button>
       </div>
     </td>
   </tr>
@@ -24,14 +26,27 @@ export default {
     }
   },
   methods:{
-    edit(item){
-
-      return console.log(item.id)
-    },
-    async remove(item){
+    remove(item){
       try {
-        // resource will not be really updated on the server but it will be faked as if.
-        this.$store.dispatch('removeRow', item);
+        Swal.fire({
+          title: "Sei sicuro di voler eliminare il post?",
+          text: "L'operazione è irreversibile!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sono sicuro",
+          cancelButtonText: "Annulla"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$store.dispatch('removeRow', item);
+            Swal.fire({
+              title: "Eliminato!",
+              text: "Il post è stato cancellato con successo!",
+              icon: "success"
+            });
+          }
+        });
       } catch (error) {
         console.error(`Error deleting post: ${error}`);
       }
