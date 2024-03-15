@@ -52,6 +52,11 @@ export default {
         console.error(`Error deleting post: ${error}`);
       }
     }
+  },
+  data(){
+    return{
+      id: this.item.id
+    }
   }
 }
 </script>
