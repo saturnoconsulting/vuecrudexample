@@ -1,6 +1,6 @@
 <template>
   <div class="margin">
-    <b-card header="Crea un nuovo post">
+    <b-card header="Modifica il post">
       <b-card-body>
         <b-form @submit="onSubmit" v-if="show">
           <b-form-group
